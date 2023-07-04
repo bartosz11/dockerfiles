@@ -8,9 +8,9 @@ services:
     image: containrrr/watchtower:latest
     container_name: watchtower
     restart: unless-stopped
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - /root/.docker/config.json:/config.json # required if you use 2fa
-  environment:
-    #London is an example, change it to yours
-    TZ: "Europe/London"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /root/.docker/config.json:/config.json # required if you use 2fa
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"

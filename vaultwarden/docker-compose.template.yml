@@ -3,7 +3,8 @@
 #Note that vaultwarden is a thing that's meant to be secure; this template contains an extremely barebones config.
 #Read https://github.com/dani-garcia/vaultwarden/wiki to learn how to configure and harden your instance.
 
-vaultwarden:
+services:
+  vaultwarden:
     container_name: vaultwarden
     image: vaultwarden/server:latest
     restart: unless-stopped
