@@ -1,0 +1,22 @@
+---
+#See https://docs.speedtest-tracker.dev/ for more info about the image.
+#Note: this template uses SQLite. Speedtest Tracker can use MySQL/MariaDB/PostgreSQL too.
+version: "3"
+
+services:
+  speedtest-tracker:
+    image: ghcr.io/alexjustesen/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    restart: unless-stopped
+    ports:
+      - 80:80 # HTTP
+      - 443:443 # HTTPS
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"
+      #You can change these if you want, my instance works fine with these default values
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - ./config:/config
+      - ./ssl:/etc/ssl/web

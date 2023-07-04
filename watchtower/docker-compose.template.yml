@@ -1,0 +1,16 @@
+---
+#See https://hub.docker.com/r/containrrr/watchtower for more info about the image.
+#Docs on further setting up are available here: https://containrrr.dev/watchtower/
+version: "3"
+
+services:
+  watchtower:
+    image: containrrr/watchtower:latest
+    container_name: watchtower
+    restart: unless-stopped
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /root/.docker/config.json:/config.json # required if you use 2fa
+  environment:
+    #London is an example, change it to yours
+    TZ: "Europe/London"

@@ -1,0 +1,22 @@
+---
+#Note that this template is for Portainer Community Edition.
+#This template is made for the "local" docker standalone environment, technically nothing stops you from connecting more. 
+#See https://hub.docker.com/r/portainer/portainer-ce for more info on the image.
+version: "3"
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: unless-stopped
+    #You may want to move some of these port mappings to an "expose" section or remove them completely
+    ports:
+      - 8000:8000 # For connecting Edge agents
+      - 9443:9443 # HTTPS API and Web UI (using self signed certificate by default)
+      #- 9000:9000 # HTTP API and Web UI - considered legacy - I'd use 9443 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  
+      - ./data:/data
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"

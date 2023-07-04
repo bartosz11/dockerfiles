@@ -1,0 +1,16 @@
+---
+#See https://hub.docker.com/r/vaultwarden/server for more info about the image.
+#Note that vaultwarden is a thing that's meant to be secure; this template contains an extremely barebones config.
+#Read https://github.com/dani-garcia/vaultwarden/wiki to learn how to configure and harden your instance.
+
+vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/Warsaw"
+    volumes:
+      - ./data:/data
+    ports:
+      - 80:80 # HTTP web UI - you might want to move this mapping to an "expose" section or remove it 

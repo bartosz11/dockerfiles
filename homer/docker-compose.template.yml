@@ -1,0 +1,16 @@
+---
+#See https://hub.docker.com/r/b4bz/homer for more info about the image.
+version: "3"
+
+services:
+  homer:
+    image: b4bz/homer:latest
+    container_name: homer
+    restart: unless-stopped
+    ports:
+      - 8080:8080 # HTTP, you may want to move this to an "expose" section
+    volumes:
+      - ./data:/www/assets
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"

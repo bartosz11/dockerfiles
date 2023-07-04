@@ -1,0 +1,17 @@
+---
+#See https://hub.docker.com/_/influxdb for more info about the image.
+version: "3"
+
+services:
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: unless-stopped
+    ports:
+      - 8086:8086 # HTTP web panel and API, you may want to move this to an "expose" section
+    volumes:
+      - ./data:/var/lib/influxdb2
+      - ./config:/etc/influxdb2
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"

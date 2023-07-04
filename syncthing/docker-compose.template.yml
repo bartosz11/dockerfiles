@@ -1,0 +1,20 @@
+---
+#See https://github.com/syncthing/syncthing/blob/main/README-Docker.md a bit of info about running Syncthing in Docker.
+#This template is using "host" network mode from the guide above to improve performance.
+version: "3"
+
+services:
+  syncthing:
+    image: syncthing/syncthing:latest
+    container_name: syncthing
+    restart: unless-stopped
+    hostname: syncthing-server # I'd change that
+    network_mode: host # NOTE THAT THIS IS A THING! You can't control Syncthing's ports on Docker level because of this.
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"        
+      PGID: 1000 
+      PUID: 1000 # These two can be left like this
+      STGUIADDRESS: #Left as blank to make Syncthing bind it's GUI to 127.0.0.1:8384 on the host machine, if you have a dockerized reverse proxy use 172.17.0.1:8384
+    volumes:
+      - ./syncthing:/var/syncthing

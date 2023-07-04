@@ -1,0 +1,21 @@
+---
+#See https://hub.docker.com/r/kanboard/kanboard for more info about the image.
+version: "3"
+
+services:
+  kanboard:
+    image: kanboard/kanboard:latest
+    container_name: kanboard
+    restart: unless-stopped
+    #From my experience you don't need the HTTP port; I reverse proxy kanban.<server>.<my domain> to kanboard:443 
+    #You may want to move some of these port mappings to an "expose" section or remove them completely
+    ports:
+      - 80:80 # HTTP
+      - 443:443 # HTTPS
+    volumes:
+      - ./data:/var/www/app/data
+      - ./plugins:/var/www/app/plugins
+      - ./ssl:/etc/nginx/ssl
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"

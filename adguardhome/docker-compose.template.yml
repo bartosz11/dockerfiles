@@ -1,0 +1,33 @@
+---
+# See https://hub.docker.com/r/adguard/adguardhome for more info on the image
+version: "3"
+
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+    restart: unless-stopped
+    #You may want to move some of these port mappings to an "expose" section or remove them completely
+    ports:
+      - 80:80/tcp # HTTP control panel
+      - 3000:3000/tcp # HTTP control panel - required for first time setup only if I remember correctly
+      - 443:443/tcp # HTTPS control panel + DNS over HTTPS
+      - 443:443/udp # DNS over HTTPS? Doesn't make much sense, that's what docs say though
+      - 53:53/tcp # Plain DNS
+      - 53:53/udp # Plain DNS
+      - 853:853/tcp # DNS over TLS
+      - 784:784/udp # DNS over QUIC
+      - 853:853/udp # DNS over QUIC
+      - 8853:8853/udp # DNS over QUIC
+      - 5443:5443/tcp # DNSCrypt
+      - 5443:5443/udp # DNSCrypt
+      - 67:67/udp # DHCP - requires network mode "host"
+      - 68:68/tcp # DHCP - requires network mode "host"
+      - 68:68/udp # DHCP - requires network mode "host"
+    volumes:
+      - ./config:/opt/adguardhome/conf
+      - ./workdir:/opt/adguardhome/work
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"  
+      

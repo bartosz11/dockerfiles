@@ -1,0 +1,22 @@
+---
+# See https://hub.docker.com/r/jc21/nginx-proxy-manager for more info about the image.
+# Note that NPM can use MariaDB/MySQL as it's database. Default is SQLite.
+version: "3"
+
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: npm
+    restart: unless-stopped
+    ports:
+      - 80:80/tcp # HTTP proxy
+      - 443:443/tcp # HTTPS proxy
+      - 81:81/tcp # HTTP Web UI
+    environment:
+      #Uncomment this if you don't use IPv6
+      #DISABLE_IPV6: "true"
+      #London is an example, change it to yours
+      TZ: "Europe/London"
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt

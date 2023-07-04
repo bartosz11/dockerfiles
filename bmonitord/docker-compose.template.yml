@@ -1,0 +1,17 @@
+---
+#See https://github.com/bartosz11/bmonitord for more info about the app.
+#bmonitord requires a database: MariaDB or PostgreSQL; this isn't covered here. It's repo has an example docker-compose with PostgreSQL: https://github.com/bartosz11/bmonitord/blob/v2/docker-compose.example.postgres.yml
+version: "3"
+
+services:
+  bmonitord:
+    image: bartosz11/bmonitord:v2
+    container_name: bmonitord
+    restart: unless-stopped
+    ports:
+      - 8080:8080 # HTTP web UI and API, you might want to move it to an expose section, or remove it
+    volumes:
+      - ./bmonitord:/home/root
+    environment:
+      #London is an example, change it to yours
+      TZ: "Europe/London"
